@@ -1,10 +1,10 @@
 from setuptools import setup
 
-setup(name='YourAppName',
-      version='1.0',
+setup(name='PlaylistToMP3',
+      version='0.0',
       description='OpenShift App',
-      author='Your Name',
-      author_email='example@example.com',
+      author='Traskiloner',
+      author_email='alberto.andrades.gil@gmail.com',
       url='http://www.python.org/sigs/distutils-sig/',
-      install_requires=['bottle'],
+      install_requires=['bottle','request','requests','requests_oauthlib'],
      )

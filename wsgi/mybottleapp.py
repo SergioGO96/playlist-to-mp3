@@ -1,13 +1,18 @@
-from bottle import route, default_app
+from bottle import Bottle, route, run, request, template, default_app, static_file, get, post, response, redirect 
+import requests
+from requests_oauthlib import OAuth2Session
+from oauthlib.oauth2 import TokenExpiredError
+from urlparse import parse_qs
+import json
 
-@route('/name/<name>')
-def nameindex(name='Stranger'):
-    return '<strong>Hello, %s!</strong>' % name
- 
 @route('/')
 def index():
-    return '<strong>Hello World!</strong>'
-
+    return template('views/index.tpl')
+ 
+@route('/<filename:path>')
+def send_static(filename):
+    return static_file(filename, root='static/')
+    
 # This must be added in order to do correct path lookups for the views
 import os
 from bottle import TEMPLATE_PATH
