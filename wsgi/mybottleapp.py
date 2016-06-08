@@ -7,11 +7,11 @@ from bottle import Bottle, route, run, request, template, default_app, static_fi
 
 @route('/')
 def index():
-    return template('views/index.tpl')
+    return template('index.tpl')
  
-@route('/<filename:path>')
+@route('/static/<filename:path>')
 def send_static(filename):
-    return static_file(filename, root='static/')
+    return static_file(filename, root='static')
     
 # This must be added in order to do correct path lookups for the views
 import os
