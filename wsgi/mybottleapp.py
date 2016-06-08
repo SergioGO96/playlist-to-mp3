@@ -9,9 +9,10 @@ from bottle import Bottle, route, run, request, template, default_app, static_fi
 def index():
     return template('index.tpl')
  
-@route('/static/<filename:path>')
-def send_static(filename):
-    return static_file(filename, root='static')
+
+@route('/static/<filepath:path>')
+def server_static(filepath):
+    return static_file(filepath, root='static')
     
 # This must be added in order to do correct path lookups for the views
 import os
