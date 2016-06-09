@@ -40,12 +40,12 @@ def get_token():
 
   oauth2 = OAuth2Session(client_id, state=request.cookies.oauth_state,redirect_uri=redirect_uri)
   token = oauth2.fetch_token(token_url, client_secret=client_secret,authorization_response=request.url)
-  response.set_cookie("token", token,secret='some-secret-key')
+  response.set_cookie("token", token,secret=client_secret)
   redirect("/perfil")
 
 @get('/perfil')
 def personal():
-	token = request.get_cookie("token", secret='some-secret-key')
+	token = request.get_cookie("token", secret=client_secret)
 	tokens = token["token_type"]+" "+token["access_token"]
 	headers = {"Accept":"aplication/json","Authorization":tokens}
 	perfil = requests.get("https://api.spotify.com/v1/me", headers=headers)
