@@ -27,41 +27,31 @@ def token_valido():
 @get('/login')
 def LOGIN():
   if token_valido():
-    redirect("/usuario")
+    redirect("/perfil")
   else:
     response.set_cookie("token", '',max_age=0)
     oauth2 = OAuth2Session(client_id, redirect_uri=redirect_uri,scope=scope)
     authorization_url, state = oauth2.authorization_url('https://accounts.spotify.com/authorize/')
     response.set_cookie("oauth_state", state)
     redirect(authorization_url)
-    
+
 @get('/callback_spotify')
 def get_token():
 
   oauth2 = OAuth2Session(client_id, state=request.cookies.oauth_state,redirect_uri=redirect_uri)
   token = oauth2.fetch_token(token_url, client_secret=client_secret,authorization_response=request.url)
   response.set_cookie("token", token,secret='some-secret-key')
-  redirect("/usuario")
-  
-@get('/usuario')
-def usuario():
+  redirect("/perfil")
+
+@get('/perfil')
+def personal():
 	token = request.get_cookie("token", secret='some-secret-key')
 	tokens = token["token_type"]+" "+token["access_token"]
 	headers = {"Accept":"aplication/json","Authorization":tokens}
-	usuario = requests.get("https://api.spotify.com/v1/me", headers=headers)
-	if usuario.status_code == 200:
-		cuenta = usuario.json()
-		
+	perfil = requests.get("https://api.spotify.com/v1/me", headers=headers)
+	if perfil.status_code == 200:
+		cuenta = perfil.json()
 	return cuenta
-	#template('perfil.tpl', usuario=cuenta)
-
-@get('/listas')
-def listas():
-	token = request.get_cookie("token", secret='some-secret-key')
-	tokens = tokens = token["token_type"]+" "+token["access_token"]
-	headers = {"Accept":"aplication/json","Authorization":tokens}
-	listas = requests.get("https://api.spotify.com/v1/users/{user_id}/playlists", headers=headers)
-	return listas 
 	
 @route('/')
 def index():
