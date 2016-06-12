@@ -6,5 +6,5 @@ setup(name='PlaylistToMP3',
       author='Traskiloner',
       author_email='alberto.andrades.gil@gmail.com',
       url='http://www.python.org/sigs/distutils-sig/',
-      install_requires=['bottle','requests','requests-oauthlib'],
+      install_requires=['bottle','requests','requests-oauthlib','google-api-python-client'],
      )
