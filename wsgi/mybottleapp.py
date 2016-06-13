@@ -54,8 +54,18 @@ def personal():
 	perfil = requests.get("https://api.spotify.com/v1/me", headers=headers)
 	if perfil.status_code == 200:
 		cuenta = perfil.json()
-	cuenta = cuenta["id"]
-	return cuenta
+		cuenta = cuenta["id"]
+	redirect("/listas")
+
+@get('/listas')
+def listas():
+	token = request.get_cookie("token", secret='some-secret-key')
+	tokens = token["token_type"]+" "+token["access_token"]
+	headers = {"Accept":"aplication/json","Authorization":tokens}
+	listas = requests.get("https://api.spotify.com/v1/users"+str(cuenta)+"playlists", headers=headers)
+	if listas.status_code == 200:
+		listas = listas.json()
+	return listas
 
 @route('/')
 def index():
