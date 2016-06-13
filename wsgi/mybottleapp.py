@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from bottle import Bottle, route, run, request, template, default_app, static_file, get, post, response, redirect 
 import requests
 from requests_oauthlib import OAuth1
