@@ -1,5 +1,6 @@
 from bottle import Bottle, route, run, request, template, default_app, static_file, get, post, response, redirect 
 import requests
+from requests_oauthlib import OAuth1
 from requests_oauthlib import OAuth2Session
 from oauthlib.oauth2 import TokenExpiredError
 from urlparse import parse_qs
@@ -7,6 +8,7 @@ import json
 
 client_id='49fd8e4d566b4feb83058041921fe3f7'
 client_secret='6bad2e72ce824fd3a213e823d665d00d'
+youtube_servidor='AIzaSyAz9FAUJAgSEDkdE-6wsFhgc18S058wNWU'
 redirect_uri = 'http://playlisttomp3-traskiloner.rhcloud.com/callback_spotify'
 scope = ['playlist-read-private', 'playlist-read-collaborative']
 token_url = "https://accounts.spotify.com/api/token"
@@ -45,14 +47,14 @@ def get_token():
 
 @get('/perfil')
 def personal():
-	token = request.get_cookie("token", secret=client_secret)
+	token = request.get_cookie("token", secret='some-secret-key')
 	tokens = token["token_type"]+" "+token["access_token"]
 	headers = {"Accept":"aplication/json","Authorization":tokens}
 	perfil = requests.get("https://api.spotify.com/v1/me", headers=headers)
 	if perfil.status_code == 200:
 		cuenta = perfil.json()
 	return cuenta
-	
+
 @route('/')
 def index():
     return template('index.tpl')
