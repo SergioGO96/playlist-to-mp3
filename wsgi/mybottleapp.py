@@ -59,7 +59,7 @@ def personal():
 	listas = requests.get(url_playlists, headers=headers)
 	if listas.status_code == 200:
 		playlists_usuario = listas.json()
-	return playlists_usuario
+	return template('listas.tpl', listas_usuario=playlists_usuario)
 
 #@get('/listas')
 #def listas():

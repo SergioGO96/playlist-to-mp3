@@ -30,6 +30,7 @@
 <header>
   <div class="container">
     <h2 class="docs-header"> Playlist to MP3</h2>
+    <p>Si devuelve un error 500, cambiar de HTTP a HTTPS</p>
   </div>
 </header>
 <section>
