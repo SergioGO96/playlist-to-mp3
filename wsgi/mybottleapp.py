@@ -39,10 +39,9 @@ def LOGIN():
 
 @get('/callback_spotify')
 def get_token():
-
   oauth2 = OAuth2Session(client_id, state=request.cookies.oauth_state,redirect_uri=redirect_uri)
   token = oauth2.fetch_token(token_url, client_secret=client_secret,authorization_response=request.url)
-  response.set_cookie("token", token,secret=client_secret)
+  response.set_cookie("token", token,secret='some-secret-key')
   redirect("/perfil")
 
 @get('/perfil')
