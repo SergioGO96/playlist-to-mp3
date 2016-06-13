@@ -52,7 +52,7 @@ def personal():
 	perfil = requests.get("https://api.spotify.com/v1/me", headers=headers)
 	if perfil.status_code == 200:
 		cuenta = perfil.json()
-	return cuenta["id"]
+	return cuenta
 
 @route('/')
 def index():
