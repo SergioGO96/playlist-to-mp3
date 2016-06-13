@@ -55,10 +55,11 @@ def personal():
 	if perfil.status_code == 200:
 		cuenta = perfil.json()
 		cuenta = cuenta["id"]
-	listas = requests.get("https://api.spotify.com/v1/users"+cuenta+"/playlists", headers=headers)
+		url_playlists = "https://api.spotify.com/v1/users"+str(cuenta)+"/playlists"
+	listas = requests.get(url_playlists, headers=headers)
 	if listas.status_code == 200:
 		playlists_usuario = listas.json()
-	return playlists_usuario
+	return url_playlists
 
 #@get('/listas')
 #def listas():
