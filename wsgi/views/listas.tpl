@@ -1,10 +1,11 @@
 % include('header.tpl')
     <div class="docs-content">
       <h3> Tus listas </h3>
+      <label for="nombre">Selecciona la lista a visualizar</label> <br/>
+      <select id="nombre" name="nombre">
       %for lista in listas_usuario['items']:
-         <a href="{{lista["tracks"]["href"]}}"><img src="{{lista["images"][0]["url"]}}" alt="Caratula playlist" width='10%' ></a>
-         <a href="{{lista["tracks"]["href"]}}">{{lista["name"]}}</a>
-         <br>
+          <option value="{{lista["tracks"]["href"]}}">{{lista["name"]}}</option>
       %end
+      </select>
 	</div>
 % include('footer.tpl')
