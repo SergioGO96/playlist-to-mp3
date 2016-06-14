@@ -72,7 +72,7 @@ def listas():
 		canciones = canciones.json()
 		lista_canciones = []
 		for cancion in canciones['items']:
-			lista_canciones.append(cancion["track"]["name"]" - "cancion["track"]["artists"][0]["name"])
+			lista_canciones.append(cancion["track"]["name"]+" - "+cancion["track"]["artists"][0]["name"])
 	return template('canciones.tpl',lista_canciones=lista_canciones)
 
 
