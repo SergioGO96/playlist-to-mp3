@@ -86,7 +86,7 @@ def youtube():
 @route('/youtube',method='POST')
 def youtube():
 	video_busqueda = request.forms.get('nombre')
-	url_cancion_youtube = requests.get('https://www.googleapis.com/youtube/v3/search?part=id&q='+video_busqueda.replace(" ","-")+'&maxResults=10&type=video&key=AIzaSyAz9FAUJAgSEDkdE-6wsFhgc18S058wNWU')
+	url_cancion_youtube = requests.get('https://www.googleapis.com/youtube/v3/search?part=id&q='+video_busqueda.replace(" ","-")+'&maxResults=1&type=video&key=AIzaSyAz9FAUJAgSEDkdE-6wsFhgc18S058wNWU')
 	if url_cancion_youtube.status_code == 200:
 		url_cancion_youtube = url_cancion_youtube.json()
 		lista_videos=[]
