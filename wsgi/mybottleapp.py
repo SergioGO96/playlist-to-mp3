@@ -70,7 +70,10 @@ def listas():
 	canciones = requests.get(url_lista, headers=headers)
 	if canciones.status_code == 200:
 		canciones = canciones.json()
-	return template('canciones.tpl',lista_canciones=canciones)
+		lista_canciones = []
+		for cancion in canciones['items']:
+			lista_canciones.append(cancion["track"]["name"]" - "cancion["track"]["artists"][0]["name"])
+	return template('canciones.tpl',lista_canciones=lista_canciones)
 
 
 @route('/')
