@@ -3,7 +3,7 @@
       <h3> Canciones de la lista seleccionada listas </h3>
       %for cancion in lista_canciones:
 		<p>{{cancion["nombre"]}} - {{cancion["url_youtube"]}}</p>
-		{{lista_canciones}}
       %end
+	{{lista_canciones}}
 	</div>
 % include('footer.tpl')
