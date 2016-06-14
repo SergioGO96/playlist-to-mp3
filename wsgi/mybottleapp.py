@@ -68,6 +68,8 @@ def listas():
 	tokens = token["token_type"]+" "+token["access_token"]
 	headers = {"Accept":"aplication/json","Authorization":tokens}
 	canciones = requests.get(url_lista, headers=headers)
+	if canciones.status_code == 200:
+		canciones = canciones.json()
 	return template('canciones.tpl',lista_canciones=canciones)
 
 
