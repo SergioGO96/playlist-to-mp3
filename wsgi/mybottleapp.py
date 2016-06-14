@@ -31,7 +31,7 @@ def token_valido():
 @get('/login')
 def LOGIN():
   if token_valido():
-    redirect("/perfil")
+    redirect("/listas")
   else:
     response.set_cookie("token", '',max_age=0)
     oauth2 = OAuth2Session(client_id, redirect_uri=redirect_uri,scope=scope)
@@ -44,9 +44,9 @@ def get_token():
   oauth2 = OAuth2Session(client_id, state=request.cookies.oauth_state,redirect_uri=redirect_uri)
   token = oauth2.fetch_token(token_url, client_secret=client_secret,authorization_response=request.url)
   response.set_cookie("token", token,secret='some-secret-key')
-  redirect("/perfil")
+  redirect("/listas")
 
-@get('/perfil')
+@get('/listas')
 def personal():
 	token = request.get_cookie("token", secret='some-secret-key')
 	tokens = token["token_type"]+" "+token["access_token"]
@@ -61,16 +61,11 @@ def personal():
 		playlists_usuario = listas.json()
 	return template('listas.tpl', listas_usuario=playlists_usuario)
 
-#@get('/listas')
-#def listas():
-#	token = request.get_cookie("token", secret='some-secret-key')
-#	tokens = token["token_type"]+" "+token["access_token"]
-#	headers = {"Accept":"aplication/json","Authorization":tokens}
-#	listas = requests.get("https://api.spotify.com/v1/users"+str(cuenta)+"playlists", headers=headers)
-#	if listas.status_code == 200:
-#		listas = listas.json()
-#	return listas
-
+@route('/listas',method='POST')
+def listas():
+	url_lista = request.forms.get('nombre')
+	return url_lista
+	
 @route('/')
 def index():
     return template('index.tpl')
