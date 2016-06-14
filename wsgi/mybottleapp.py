@@ -64,8 +64,13 @@ def personal():
 @route('/listas',method='POST')
 def listas():
 	url_lista = request.forms.get('nombre')
-	return url_lista
-	
+	token = request.get_cookie("token", secret='some-secret-key')
+	tokens = token["token_type"]+" "+token["access_token"]
+	headers = {"Accept":"aplication/json","Authorization":tokens}
+	canciones = requests.get(url_lista, headers=headers)
+	return canciones
+
+
 @route('/')
 def index():
     return template('index.tpl')
