@@ -72,9 +72,10 @@ def listas():
 		canciones = canciones.json()
 		lista_canciones = []
 		for cancion in canciones['items']:
-			lista_canciones.append(cancion["track"]["name"]+" - "+cancion["track"]["artists"][0]["name"])
+			nombre_cancion = cancion["track"]["name"]+" - "+cancion["track"]["artists"][0]["name"]
+			url_cancion_youtube = requests.get('https://www.googleapis.com/youtube/v3/search?part=id&q='+nombre_cancion.replace(" ","-")+'&maxResults=1&type=video&key=AIzaSyAz9FAUJAgSEDkdE-6wsFhgc18S058wNWU')
+			lista_canciones.append({"nombre":nombre_cancion,"url_youtube":url_cancion_youtube)
 	return template('canciones.tpl',lista_canciones=lista_canciones)
-
 
 @route('/')
 def index():
