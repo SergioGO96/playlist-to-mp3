@@ -79,6 +79,10 @@ def listas():
 				lista_canciones.append({"nombre":nombre_cancion,"url_youtube":url_cancion_youtube["items"][0]["id"]["videoId"]})
 	return template('canciones.tpl',lista_canciones=lista_canciones)
 
+route('/youtube')
+def youtube():
+	return template('youtube.tpl')
+
 @route('/')
 def index():
     return template('index.tpl')
