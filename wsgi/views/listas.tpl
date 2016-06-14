@@ -8,6 +8,7 @@
           <option value="{{lista["tracks"]["href"]}}">{{lista["name"]}}</option>
       %end
       </select>
+      <input type="submit" value="Continuar">
       </form>
 	</div>
 % include('footer.tpl')
