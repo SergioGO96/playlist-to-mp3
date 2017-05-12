@@ -46,6 +46,10 @@ def get_token():
   response.set_cookie("token", token,secret='some-secret-key')
   redirect("/listas")
 
+@get('/principal')
+def personal():
+	return template('principal.tpl')	
+	
 @get('/listas')
 def personal():
 	token = request.get_cookie("token", secret='some-secret-key')
